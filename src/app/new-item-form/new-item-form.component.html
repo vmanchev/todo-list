@@ -1,0 +1,33 @@
+<div class="card">
+  <div class="card-body">
+    <form #f="ngForm" (ngSubmit)="handleFormSubmit(f)" novalidate>
+      <div class="row">
+        <div class="col-2">
+          <label class="col-form-label">Task</label>
+        </div>
+        <div class="col-8">
+          <input
+            type="text"
+            autocomplete="off"
+            autofocus
+            id="todoText"
+            class="form-control"
+            name="todoItemModel"
+            [(ngModel)]="todoItemModel"
+            required
+            [ngClass]="{ 'is-invalid': isInvalidForm(f) }"
+          />
+
+          <div class="invalid-feedback" *ngIf="isInvalidForm(f)">
+            <div *ngIf="f.form.controls.todoItemModel?.errors?.required">
+              This field is required.
+            </div>
+          </div>
+        </div>
+        <div class="col-2">
+          <button class="btn btn-primary" type="submit">Add</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

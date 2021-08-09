@@ -1,31 +1,47 @@
-import { TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
+  let component: AppComponent;
+  let fixture: ComponentFixture<AppComponent>;
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        AppComponent
-      ],
-    }).compileComponents();
+      declarations: [AppComponent],
+    })
+      .overrideComponent(AppComponent, { set: { template: '' } })
+      .compileComponents();
   });
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
-  });
-
-  it(`should have as title 'todo-list'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('todo-list');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
+  beforeEach(() => {
+    fixture = TestBed.createComponent(AppComponent);
+    component = fixture.componentInstance;
     fixture.detectChanges();
-    const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('todo-list app is running!');
+  });
+
+  describe('addNewItem', () => {
+    it('should add new item at the end of items list', () => {
+      // ARRANGE
+      component.todoListItems = ['test3'];
+
+      // ACT
+      component.addNewItem('test4');
+
+      // ASSERT
+      expect(component.todoListItems).toEqual(['test3', 'test4']);
+    });
+  });
+
+  describe('deleteTodoItem', () => {
+    it('should remove selected item from items list', () => {
+      // ARRANGE
+      component.todoListItems = ['test3', 'test4', 'test5'];
+
+      // ACT
+      component.deleteTodoItem('test4');
+
+      // ASSERT
+      expect(component.todoListItems).toEqual(['test3', 'test5']);
+    });
   });
 });

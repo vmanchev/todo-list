@@ -1,0 +1,14 @@
+<ul class="list-group">
+  <li
+    class="list-group-item d-flex justify-content-between align-items-center"
+    *ngFor="let item of items"
+  >
+    <span>
+      <input class="form-check-input me-1" type="checkbox" (click)="toggleItem(item)">
+      {{ item }}
+    </span>
+    <span class="item__delete" (click)="confirmDelete(item)">X</span>
+  </li>
+</ul>
+
+<button class="btn btn-danger mt-3" *ngIf="selectedForDelete?.length" (click)="deleteSelected()">Delete selected ({{selectedForDelete.length}})</button>
