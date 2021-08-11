@@ -5,7 +5,7 @@ export class AppPage {
     return browser.get(browser.baseUrl);
   }
 
-  async getTitleText(): Promise<string> {
-    return element(by.css('app-root .content span')).getText();
+  async getTaskLabel(): Promise<string> {
+    return element(by.css('.col-form-label')).getText();
   }
 }
